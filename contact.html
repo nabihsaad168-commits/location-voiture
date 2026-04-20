@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – SNH &amp; MEL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="index.html">🚗 SNH &amp; MEL</a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="vip.html">VIP</a>
+    <a href="sport.html">Sport</a>
+    <a href="familiale.html">Familiale</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<!-- CONTACT BOX -->
+<div class="contact-wrapper">
+
+  <!-- IMAGE -->
+  <div class="contact-image">
+    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Contactez-nous">
+  </div>
+
+  <!-- FORM -->
+  <div class="contact-form">
+    <h2>📩 Formulaire de Contact</h2>
+
+    <form id="contactForm" novalidate>
+
+      <div class="form-group">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" placeholder="Votre nom" autocomplete="family-name">
+        <span class="error-msg" id="err-nom">Veuillez entrer votre nom.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" placeholder="Votre prénom" autocomplete="given-name">
+        <span class="error-msg" id="err-prenom">Veuillez entrer votre prénom.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="exemple@gmail.com" autocomplete="email">
+        <span class="error-msg" id="err-email">Entrez une adresse email valide.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="telephone">Téléphone *</label>
+        <input type="tel" id="telephone" placeholder="+212 6XX XXX XXX" autocomplete="tel">
+        <span class="error-msg" id="err-telephone">Entrez un numéro de téléphone valide.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="voiture">Voiture souhaitée</label>
+        <select id="voiture">
+          <option value="">-- Choisissez un véhicule --</option>
+          <optgroup label="VIP">
+            <option>Mercedes Classe G</option>
+            <option>Mercedes Classe E</option>
+            <option>Mercedes Classe S Berline</option>
+          </optgroup>
+          <optgroup label="Sport">
+            <option>Porsche 911</option>
+            <option>Ferrari California</option>
+            <option>BMW M4 Coupé</option>
+            <option>Peugeot Sport</option>
+            <option>BMW i8</option>
+          </optgroup>
+          <optgroup label="Familiale">
+            <option>BMW X5</option>
+            <option>Toyota Land Cruiser</option>
+            <option>Peugeot 3008</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Dates souhaitées, questions..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-submit">
+        Envoyer via WhatsApp 📲
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS POPUP -->
+<div class="popup-overlay" id="successPopup">
+  <div class="popup-box">
+    <div class="icon">✅</div>
+    <h3>Message envoyé !</h3>
+    <p>Vous allez être redirigé vers WhatsApp. Nous vous répondrons dans les plus brefs délais.</p>
+    <button class="btn btn-gold" onclick="closePopup()">Fermer</button>
+  </div>
+</div>
+
+<footer>© 2025 Auto SNH &amp; MEL – Tous droits réservés</footer>
+
+<!-- ==============================
+     JAVASCRIPT — VALIDATION + WA
+     ============================== -->
+<script>
+// ── Pré-remplissage depuis URL param (?voiture=Mercedes+Classe+G) ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const v = params.get('voiture');
+  if (v) {
+    const sel = document.getElementById('voiture');
+    for (let opt of sel.options) {
+      if (opt.value === v) { opt.selected = true; break; }
+    }
+  }
+})();
+
+// ── Helpers ──
+function showError(id, show) {
+  const el = document.getElementById('err-' + id);
+  const inp = document.getElementById(id);
+  if (show) { el.classList.add('show'); inp.classList.add('error'); }
+  else       { el.classList.remove('show'); inp.classList.remove('error'); }
+}
+
+function validateEmail(val) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+}
+
+function validatePhone(val) {
+  // Accepts formats: +212XXXXXXXXX, 06XXXXXXXX, 07XXXXXXXX, etc.
+  return /^[+\d][\d\s\-]{7,15}$/.test(val.trim());
+}
+
+// ── Live validation (removes errors as user types) ──
+['nom','prenom','email','telephone'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', function() {
+    showError(id, false);
+  });
+});
+
+// ── Form submit ──
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var nom       = document.getElementById('nom').value.trim();
+  var prenom    = document.getElementById('prenom').value.trim();
+  var email     = document.getElementById('email').value.trim();
+  var telephone = document.getElementById('telephone').value.trim();
+  var voiture   = document.getElementById('voiture').value;
+  var message   = document.getElementById('message').value.trim();
+
+  var valid = true;
+
+  if (!nom)              { showError('nom', true);       valid = false; }
+  if (!prenom)           { showError('prenom', true);    valid = false; }
+  if (!validateEmail(email))  { showError('email', true);     valid = false; }
+  if (!validatePhone(telephone)) { showError('telephone', true); valid = false; }
+
+  if (!valid) return;
+
+  // ── Build WhatsApp URL ──
+  var numero = "212632156163"; // ← Modifiez ce numéro si besoin
+
+  var text =
+    "📌 *Nouveau message – Auto SNH & MEL*\n\n" +
+    "👤 Nom : " + nom + " " + prenom + "\n" +
+    "📧 Email : " + email + "\n" +
+    "📞 Téléphone : " + telephone + "\n" +
+    (voiture ? "🚗 Voiture : " + voiture + "\n" : "") +
+    (message ? "💬 Message : " + message : "");
+
+  var waURL = "https://wa.me/" + numero + "?text=" + encodeURIComponent(text);
+
+  // Show success popup, then open WhatsApp
+  document.getElementById('successPopup').classList.add('show');
+  setTimeout(function() {
+    window.open(waURL, "_blank");
+  }, 1200);
+});
+
+function closePopup() {
+  document.getElementById('successPopup').classList.remove('show');
+}
+</script>
+
+</body>
+</html>
