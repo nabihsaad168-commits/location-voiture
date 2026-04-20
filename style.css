@@ -1,0 +1,283 @@
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:    #ae7410;
+  --gold-lt: #d49c27;
+  --blue:    #185A78;
+  --blue-dk: #0f3d52;
+  --dark:    #0f1923;
+  --dark2:   #172231;
+  --white:   #f8f8f8;
+  --card-bg: rgba(255,255,255,0.07);
+  --radius:  12px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(135deg, var(--dark) 0%, #1a2e42 50%, var(--dark2) 100%);
+  min-height: 100vh;
+  color: var(--white);
+}
+
+/* ========== HEADER / NAV ========== */
+header {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--gold);
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background 0.25s, color 0.25s;
+}
+
+nav a:hover, nav a.active {
+  background: var(--gold);
+  color: #000;
+}
+
+/* ========== HERO (index) ========== */
+.hero {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://wallpaperaccess.com/full/33115.jpg') center/cover no-repeat;
+  filter: brightness(0.4);
+}
+
+.hero-content { position: relative; z-index: 1; padding: 20px; }
+.hero-content h1 { font-size: 2.8rem; color: var(--gold); margin-bottom: 10px; }
+.hero-content p  { font-size: 1.1rem; color: #ccc; max-width: 500px; margin: 0 auto 25px; }
+
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.15s;
+}
+.btn:hover { background: var(--blue-dk); transform: translateY(-1px); }
+.btn-gold { background: var(--gold); color: #000; }
+.btn-gold:hover { background: var(--gold-lt); }
+
+/* ========== SECTION TITLE ========== */
+.section-title {
+  text-align: center;
+  padding: 40px 20px 10px;
+  font-size: 1.8rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px; height: 3px;
+  background: var(--gold);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ========== CATEGORY CARDS (index) ========== */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  padding: 30px 20px 50px;
+}
+
+.cat-card {
+  width: 270px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid rgba(174,116,16,0.3);
+  transition: transform 0.25s, box-shadow 0.25s;
+  text-decoration: none;
+  color: var(--white);
+}
+.cat-card:hover { transform: translateY(-6px); box-shadow: 0 12px 35px rgba(174,116,16,0.3); }
+
+.cat-card img { width: 100%; height: 175px; object-fit: cover; display: block; }
+
+.cat-card-body { padding: 16px; text-align: center; }
+.cat-card-body h3 { font-size: 1.2rem; color: var(--gold); margin-bottom: 6px; }
+.cat-card-body p  { font-size: 0.85rem; color: #aaa; }
+
+/* ========== CAR GRID (vip / sport / familiale) ========== */
+.car-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 30px 20px 50px;
+}
+
+.car-card {
+  width: 290px;
+  background: var(--card-bg);
+  border: 1px solid rgba(174,116,16,0.25);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.car-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+.car-card img { width: 100%; height: 185px; object-fit: cover; display: block; }
+
+.car-card-body { padding: 16px; text-align: center; }
+.car-card-body h2 { font-size: 1.1rem; margin-bottom: 8px; }
+.price { color: var(--gold); font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+
+/* ========== BACK LINK ========== */
+.back-bar { text-align: center; padding: 20px; }
+
+/* ========== CONTACT PAGE ========== */
+.contact-wrapper {
+  max-width: 920px;
+  margin: 50px auto;
+  display: flex;
+  background: rgba(0,0,0,0.55);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(174,116,16,0.25);
+}
+
+.contact-image { width: 45%; flex-shrink: 0; }
+.contact-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.contact-form { flex: 1; padding: 36px; }
+.contact-form h2 { text-align: center; color: var(--gold); margin-bottom: 24px; font-size: 1.5rem; }
+
+.form-group { margin-bottom: 16px; }
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.4); }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(174,116,16,0.2);
+}
+input.error, textarea.error { border-color: #e74c3c !important; }
+
+textarea { resize: vertical; height: 105px; }
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: none;
+}
+.error-msg.show { display: block; }
+
+.btn-submit {
+  width: 100%;
+  padding: 13px;
+  font-size: 1rem;
+  margin-top: 6px;
+}
+
+/* ========== SUCCESS POPUP ========== */
+.popup-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+.popup-overlay.show { display: flex; }
+
+.popup-box {
+  background: var(--dark2);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 40px 50px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: popIn 0.3s ease;
+}
+@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.popup-box .icon { font-size: 3rem; margin-bottom: 12px; }
+.popup-box h3 { color: var(--gold); font-size: 1.4rem; margin-bottom: 8px; }
+.popup-box p  { color: #ccc; margin-bottom: 22px; }
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--blue);
+  text-align: center;
+  padding: 14px;
+  font-size: 0.9rem;
+  color: #dde;
+  margin-top: auto;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 720px) {
+  .contact-wrapper { flex-direction: column; }
+  .contact-image { width: 100%; height: 200px; }
+  header { flex-direction: column; gap: 12px; }
+  .hero-content h1 { font-size: 2rem; }
+}
