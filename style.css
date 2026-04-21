@@ -208,7 +208,7 @@ select {
   border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.15);
   background: rgba(255,255,255,0.08);
-  color: #fff;
+  color: #423d3d;
   font-size: 0.95rem;
   transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
